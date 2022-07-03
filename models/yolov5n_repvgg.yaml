@@ -1,0 +1,29 @@
+# YOLOv5 🚀 by Ultralytics, GPL-3.0 license
+
+# Parameters
+nc: 80  # number of classes
+depth_multiple: 1  # model depth multiple
+width_multiple: 1  # layer channel multiple
+anchors:
+  - [10,13, 16,30, 33,23]  # P3/8
+  - [30,61, 62,45, 59,119]  # P4/16
+  - [116,90, 156,198, 373,326]  # P5/32
+
+# YOLOv5 v6.0 backbone
+backbone:
+  [[-1, 1, RepVGGBlock, [3, 16, 3, 2]], # in_channels, out_channels(64*0.25=16), kernel, stride
+   [-1, 1, RepVGGBlock, [16, 32, 3, 2]],
+   [-1, 1, RepBlock, [32, 32, 2]], # in_channels, out_channels, num_repeat(6*0.33=1.98~2)
+   [-1, 1, RepVGGBlock, [32, 64, 3, 2]],
+   [-1, 1, RepBlock, [64, 64, 4]], # in_channels, out_channels, num_repeat(12*0.33=3.96~4)
+   [-1, 1, RepVGGBlock, [64, 128, 3, 2]],
+   [-1, 1, RepBlock, [128, 128, 6]], # in_channels, out_channels, num_repeat(18*0.33=5.94~6)
+   [-1, 1, RepVGGBlock, [128, 256,  3, 2]],
+   [-1, 1, RepBlock, [256, 256, 2]], # in_channels, out_channels, num_repeat(6*0.33=1.98~2)
+   [-1, 1, SimSPPF, [256, 256, 5]]] # in_channels, out_channels, kernel
+
+
+# YOLOv5 v6.0 head
+head:
+   []
+
